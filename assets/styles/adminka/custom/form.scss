@@ -1,0 +1,12 @@
+.rowscountform-rowscount {
+    padding-right: 2rem;
+}
+
+.form-group.required label::after {
+    color: red;
+    padding-left: 2px;
+    content: "*";
+  }
+  .form-group.required label::after {
+
+  }

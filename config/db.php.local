@@ -1,0 +1,13 @@
+<?php
+
+use yii\db\Connection;
+
+return [
+    'class' => Connection::class,
+    'dsn'=>'oci:dbname=192.168.254.107:49161/XE;charset=AL32UTF8;',
+    'username'=>'BIX',
+    'password'=>'<<ENTER_PASSWORD>>',
+    'attributes' => [
+        PDO::ATTR_STRINGIFY_FETCHES => true,
+    ],
+];
