@@ -22,8 +22,26 @@ $this->title = 'Настройки почты';
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'enableClientValidation' => false
+    ]); ?>
                             
+    <?= $form->field($model, 'mailServerIsEnabled')->widget(SwitchInput::class,[
+        'pluginOptions' => [
+                'onText' => 'Да',
+                'offText' => 'Нет',
+            ],
+        'pluginEvents' => [
+            "switchChange.bootstrapSwitch" => 
+                "function(e) { 
+                    e.target.checked ? $('#mail-params__container').removeClass('hide') :
+                    $('#mail-params__container').addClass('hide'); 
+                    
+            }",
+        ]         
+    ]) ?>      
+                            <div id="mail-params__container"<?php if (!$model->mailServerIsEnabled): ?>class="hide"<?php endif; ?>>
+                                
     <?= $form->field($model, 'smtpServer')->textInput() ?>      
     <?= $form->field($model, 'smtpPort')->textInput() ?> 
 
@@ -39,6 +57,7 @@ $this->title = 'Настройки почты';
     <?= $form->field($model, 'senderName')->textInput() ?>                         
     <?= $form->field($model, 'senderEmail')->textInput() ?>                         
                             
+</div>
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Отмена', ['index'], ['class' => 'btn btn-secondary']) ?>

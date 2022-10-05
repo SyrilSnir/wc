@@ -40,9 +40,14 @@ class MailAction extends Action
         if ($config) {
             $form->setAttributes($config);
         }
-        if ($form->load(Yii::$app->request->post()) && $form->validate()) {
-            $this->settingsService->saveConfiguration($form, Configuration::SMTP_SETTINGS_SECTION);
-            Yii::$app->session->setFlash('configurationSaved', 'Конфигурация успешно сохранена');
+        if ($form->load(Yii::$app->request->post())) {
+            if (!$form->mailServerIsEnabled) {
+                $form->setScenario(MailConfigurationForm::SCENARIO_NO_MAIL);
+            }
+            if ($form->validate()) {
+                $this->settingsService->saveConfiguration($form, Configuration::SMTP_SETTINGS_SECTION);
+                Yii::$app->session->setFlash('configurationSaved', 'Конфигурация успешно сохранена');
+            }
         }        
         return $this->controller->render('mail',[
             'model' => $form

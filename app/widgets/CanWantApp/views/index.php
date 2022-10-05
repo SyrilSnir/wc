@@ -3,13 +3,16 @@
 use app\models\ActiveRecord\Users\User;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\web\View;
 /** @var bool $enabled */
 /** @var bool $isGuest */
 /** @var User $user */
+/** @var View $this */
 ?>
 
 <?php if ($enabled):?>
-ENABLED
+    <?php echo $this->render('cw__app', [
+    ]) ?>
 <?php else :?>
     <?php if ($isGuest): ?>
 <div class="alert alert-primary" role="alert">

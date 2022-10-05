@@ -67,8 +67,9 @@ class Configuration extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['section', 'name', 'value'], 'required'],
+            [['section', 'name'], 'required'],
             [['section', 'name', 'value'], 'string', 'max' => 255],
+            [['value'], 'default', 'value' => ''],
         ];
     }
 
